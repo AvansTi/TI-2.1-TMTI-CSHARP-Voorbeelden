@@ -7,14 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ZipFileDemo
-{
+namespace ZipFileDemo {
 
-    class Program
-    {
+    class Program {
         [STAThread]
-        static int Main(string[] args)
-        {
+        static int Main(string[] args) {
             string path = Directory.GetCurrentDirectory();
             var myDocuments = Environment.SpecialFolder.MyDocuments;
             string myDocFolder = Environment.GetFolderPath(myDocuments);
@@ -24,8 +21,7 @@ namespace ZipFileDemo
             browseFileDialog.Title = "Select a zip file...";
 
             string sourceZipFile, destFolder;
-            if (browseFileDialog.ShowDialog() != DialogResult.OK)
-            {
+            if (browseFileDialog.ShowDialog() != DialogResult.OK) {
                 return 0;
             }
             sourceZipFile = browseFileDialog.FileName;
@@ -33,26 +29,19 @@ namespace ZipFileDemo
             FolderBrowserDialog destFolderDialog = new FolderBrowserDialog();
             destFolderDialog.Description = "Select folder to extract *.cs files";
             destFolderDialog.RootFolder = myDocuments;
-            if (destFolderDialog.ShowDialog() != DialogResult.OK)
-            {
+            if (destFolderDialog.ShowDialog() != DialogResult.OK) {
                 return 0;
             }
             destFolder = destFolderDialog.SelectedPath;
             
-            using (ZipArchive archive = ZipFile.OpenRead(sourceZipFile))
-            {
-                foreach (ZipArchiveEntry entry in archive.Entries)
-                {
+            using (ZipArchive archive = ZipFile.OpenRead(sourceZipFile)) {
+                foreach (ZipArchiveEntry entry in archive.Entries) {
 
                     string fullPath = Path.Combine(destFolder, entry.FullName);
-                    if (String.IsNullOrEmpty(entry.Name))
-                    {
+                    if (String.IsNullOrEmpty(entry.Name)) {
                         Directory.CreateDirectory(fullPath);
-                    }
-                    else
-                    {
-                        if (entry.FullName.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
-                        {
+                    } else {
+                        if (entry.FullName.EndsWith(".cs", StringComparison.OrdinalIgnoreCase)) {
                             entry.ExtractToFile(fullPath);
                         }
                     }

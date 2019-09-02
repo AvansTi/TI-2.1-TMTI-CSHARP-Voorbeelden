@@ -8,8 +8,7 @@ namespace TestInheritance
 {
     class Program
     {
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
             A a = new A();
             a = new B();	// dynamic type of a is B
             a = new C();	// dynamic type of a is C
@@ -35,8 +34,7 @@ namespace TestInheritance
         }
     }
 
-    class A
-    {
+    class A {
         public int a { get; set; }
 
         public virtual void Print()
@@ -46,8 +44,7 @@ namespace TestInheritance
 
     }
 
-    class B : A
-    {
+    class B : A {
         public int b { get; set; }
 
         public override void Print()
@@ -57,8 +54,7 @@ namespace TestInheritance
         }
     }
 
-    class C : B
-    {
+    class C : B {
         private int v;
 
         public int c { get; set; }
@@ -68,13 +64,11 @@ namespace TestInheritance
         {
         }
 
-        public C(int v)
-        {
+        public C(int v) {
             this.MaybeInt = v;
         }
 
-        public override void Print()
-        {
+        public override void Print() {
             base.Print();
             Console.WriteLine("this is a C. It has a property maybeInt with value: {0}",
                 MaybeInt ?? -1);

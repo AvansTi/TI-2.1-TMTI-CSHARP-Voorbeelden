@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Net.Mime;
 
 namespace PathDemo
 {
@@ -33,6 +34,7 @@ namespace PathDemo
             Console.WriteLine("DirectorySeparatorChar: {0}", Path.DirectorySeparatorChar);
             Console.WriteLine("PathSeparatorChar: {0}", Path.PathSeparator);
             Console.WriteLine("VolumeSeparatorChar: {0}", Path.VolumeSeparatorChar);
+
 
             Console.WriteLine();
             Console.WriteLine("Combine \"C:\\Windows\\System32\" and \"xcopy.exe\": {0}", Path.Combine(@"C:\windows\system32", "xcopy.exe"));

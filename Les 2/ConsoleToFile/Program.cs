@@ -10,8 +10,7 @@ namespace ConsoleToFile
     class Program
     {
         [STAThread]
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
 
             string path = Directory.GetCurrentDirectory();
             string myDocFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -19,14 +18,11 @@ namespace ConsoleToFile
             OpenFileDialog browseFileDialog = new OpenFileDialog();
             browseFileDialog.InitialDirectory = myDocFolder;
 
-            if (browseFileDialog.ShowDialog() == DialogResult.OK)
-            {
+            if (browseFileDialog.ShowDialog() == DialogResult.OK) {
                 string sourceFile = browseFileDialog.FileName;
-                using (StreamReader reader = File.OpenText(sourceFile))
-                {
+                using (StreamReader reader = File.OpenText(sourceFile)) {
                     string line = null;
-                    while ((line = reader.ReadLine()) != null)
-                    {
+                    while ((line = reader.ReadLine()) != null) {
                         Console.WriteLine(line);
                     }
                 }

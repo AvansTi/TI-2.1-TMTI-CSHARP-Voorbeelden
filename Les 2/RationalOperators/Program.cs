@@ -29,6 +29,7 @@ namespace FractionOperators
 
             string s = null;
             PrintMessage(s);
+            PrintMessage("Hello World");
 
 
             Console.ReadLine();
