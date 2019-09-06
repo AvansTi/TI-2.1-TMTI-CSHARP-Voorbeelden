@@ -9,17 +9,14 @@ using ClientServer;
 
 namespace TcpClientTest
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
+    class Program {
+        static void Main(string[] args) {
             TcpClient client = new TcpClient("127.0.0.1", 1330);
             NetworkStream networkStream = client.GetStream();
 
             bool done = false;
             Console.WriteLine("Type 'bye' to end connection");
-            while (!done)
-            {
+            while (!done) {
                 Console.Write("Enter a message to send to server: ");
                 string message = Console.ReadLine();
 

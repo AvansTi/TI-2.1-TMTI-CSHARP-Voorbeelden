@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TcpPackageLength
 {
@@ -16,8 +12,7 @@ namespace TcpPackageLength
     /// <para>This class uses a 4-byte signed integer length prefix, which allows for message sizes up to 2 GB. Keepalive messages are supported as messages with a length prefix of 0 and no message data.</para>
     /// <para>This is EXAMPLE CODE! It is not particularly efficient; in particular, if this class is rewritten so that a particular interface is used (e.g., Socket's IAsyncResult methods), some buffer copies become unnecessary and may be removed.</para>
     /// </remarks>
-    class PacketProtocol
-    {
+    class PacketProtocol {
         /// <summary>
         /// The buffer for the length prefix; this is always 4 bytes long.
         /// </summary>
@@ -54,8 +49,7 @@ namespace TcpPackageLength
         /// <para>Generates a length prefix for the message and returns the combined length prefix and message.</para>
         /// </remarks>
         /// <param name="message">The message to send.</param>
-        public static byte[] WrapMessage(byte[] message)
-        {
+        public static byte[] WrapMessage(byte[] message) {
             // Get the length prefix for the message
             byte[] lengthPrefix = BitConverter.GetBytes(message.Length);
 
@@ -70,8 +64,7 @@ namespace TcpPackageLength
         /// <summary>
         /// Wraps a keepalive (0-length) message. The wrapped message is ready to send to a stream.
         /// </summary>
-        public static byte[] WrapKeepaliveMessage()
-        {
+        public static byte[] WrapKeepaliveMessage() {
             return BitConverter.GetBytes((int)0);
         }
 
@@ -79,8 +72,7 @@ namespace TcpPackageLength
         /// Initializes a new <see cref="PacketProtocol"/>, limiting message sizes to the given maximum size.
         /// </summary>
         /// <param name="maxMessageSize">The maximum message size supported by this protocol. This may be less than or equal to zero to indicate no maximum message size.</param>
-        public PacketProtocol(int maxMessageSize)
-        {
+        public PacketProtocol(int maxMessageSize) {
             // We allocate the buffer for receiving message lengths immediately
             lengthBuffer = new byte[sizeof(int)];
             this.maxMessageSize = maxMessageSize;
@@ -95,20 +87,17 @@ namespace TcpPackageLength
         /// </remarks>
         /// <param name="data">The data received from the stream. Cannot be null.</param>
         /// <exception cref="System.Net.ProtocolViolationException">If the data received is not a properly-formed message.</exception>
-        public void DataReceived(byte[] data)
-        {
+        public void DataReceived(byte[] data) {
             // Process the incoming data in chunks, as the ReadCompleted requests it
 
             // Logically, we are satisfying read requests with the received data, instead of processing the
             //  incoming buffer looking for messages.
 
             int i = 0;
-            while (i != data.Length)
-            {
+            while (i != data.Length) {
                 // Determine how many bytes we want to transfer to the buffer and transfer them
                 int bytesAvailable = data.Length - i;
-                if (dataBuffer != null)
-                {
+                if (dataBuffer != null) {
                     // We're reading into the data buffer
                     int bytesRequested = dataBuffer.Length - bytesReceived;
 
@@ -119,9 +108,7 @@ namespace TcpPackageLength
 
                     // Notify "read completion"
                     ReadCompleted(bytesTransferred);
-                }
-                else
-                {
+                } else {
                     // We're reading into the length prefix buffer
                     int bytesRequested = lengthBuffer.Length - bytesReceived;
 
@@ -141,21 +128,16 @@ namespace TcpPackageLength
         /// </summary>
         /// <param name="count">The number of bytes read.</param>
         /// <exception cref="System.Net.ProtocolViolationException">If the data received is not a properly-formed message.</exception>
-        private void ReadCompleted(int count)
-        {
+        private void ReadCompleted(int count)  {
             // Get the number of bytes read into the buffer
             bytesReceived += count;
 
-            if (dataBuffer == null)
-            {
+            if (dataBuffer == null) {
                 // We're currently receiving the length buffer
 
-                if (bytesReceived != sizeof(int))
-                {
+                if (bytesReceived != sizeof(int)) {
                     // We haven't gotten all the length buffer yet: just wait for more data to arrive
-                }
-                else
-                {
+                } else {
                     // We've gotten the length buffer
                     int length = BitConverter.ToInt32(lengthBuffer, 0);
 
@@ -168,27 +150,19 @@ namespace TcpPackageLength
                         throw new System.Net.ProtocolViolationException("Message length " + length.ToString(System.Globalization.CultureInfo.InvariantCulture) + " is larger than maximum message size " + maxMessageSize.ToString(System.Globalization.CultureInfo.InvariantCulture));
 
                     // Zero-length packets are allowed as keepalives
-                    if (length == 0)
-                    {
+                    if (length == 0) {
                         bytesReceived = 0;
                         MessageArrived?.Invoke(new byte[0]);
-                    }
-                    else
-                    {
+                    } else {
                         // Create the data buffer and start reading into it
                         dataBuffer = new byte[length];
                         bytesReceived = 0;
                     }
                 }
-            }
-            else
-            {
-                if (bytesReceived != dataBuffer.Length)
-                {
+            } else {
+                if (bytesReceived != dataBuffer.Length) {
                     // We haven't gotten all the data buffer yet: just wait for more data to arrive
-                }
-                else
-                {
+                } else {
                     // We've gotten an entire packet
                     MessageArrived?.Invoke(dataBuffer);
 

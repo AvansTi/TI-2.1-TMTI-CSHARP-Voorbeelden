@@ -4,18 +4,11 @@ using System.Linq;
 using System.Text;
 
 
-namespace Delegates
-{
-
-
-    class Program
-    {
+namespace Delegates  {
+    class Program {
         delegate T Calculate<T>(T a, T b);
 
-        static void Main(string[] args)
-        {
-
-
+        static void Main(string[] args) {
 
             #region Test Delegates 
             List<Calculate<double>> opsList = new List<Calculate<double>>();
@@ -35,8 +28,7 @@ namespace Delegates
             opsList.Add(Multiply);
 
             double result = 0.0;
-            foreach (Calculate<double> op in opsList)
-            {
+            foreach (Calculate<double> op in opsList) {
                 result = op(result, 3);
                 Console.WriteLine($"result = {result}");
             }
@@ -44,18 +36,15 @@ namespace Delegates
             Console.ReadKey();
         }
 
-        static double Divide(double a, double b)
-        {
+        static double Divide(double a, double b) {
             return a / b;
         }
 
-        static double Multiply(double a, double b)
-        {
+        static double Multiply(double a, double b) {
             return a * b;
         }
 
-        static double Add(double a, double b)
-        {
+        static double Add(double a, double b) {
             return a + b;
         }
         #endregion

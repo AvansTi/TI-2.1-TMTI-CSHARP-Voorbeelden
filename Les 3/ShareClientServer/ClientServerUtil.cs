@@ -8,20 +8,15 @@ using System.Text;
 
 namespace ClientServer
 {
-    public class ClientServerUtil
-    {
+    public class ClientServerUtil  {
         public static Encoding encoding = Encoding.UTF8;
 
-        public static string ReadTextMessage(NetworkStream networkStream)
-        {
+        public static string ReadTextMessage(NetworkStream networkStream) {
             StreamReader stream = new StreamReader(networkStream, encoding);
-            string line = stream.ReadLine();
-
-            return line;
+            return stream.ReadLine();
         }
 
-        public static void WriteTextMessage(NetworkStream networkStream, string message)
-        {
+        public static void WriteTextMessage(NetworkStream networkStream, string message) {
             StreamWriter stream = new StreamWriter(networkStream, encoding);
             stream.WriteLine(message);
             stream.Flush();
@@ -32,14 +27,12 @@ namespace ClientServer
         // bij lezen lezen lees je:
         // - eerst de lengte (X) van de message
         // - vervolgens lezen tot alle X bytes gelezen zijn.
-        public static string ReadMessage(NetworkStream networkStream)
-        {
+        public static string ReadMessage(NetworkStream networkStream) {
             byte[] buffer = new byte[256];
             int totalRead = 0;
 
             //read bytes until stream indicates there are no more
-            do
-            {
+            do {
                 int read = networkStream.Read(buffer, totalRead, buffer.Length - totalRead);
                 totalRead += read;
                 Console.WriteLine("ReadMessage: " + read);
@@ -48,8 +41,7 @@ namespace ClientServer
             return encoding.GetString(buffer, 0, totalRead);
         }
 
-        public static void SendMessage(NetworkStream networkStream, string message)
-        {
+        public static void SendMessage(NetworkStream networkStream, string message) {
             //make sure the other end decodes with the same format!
             byte[] bytes = encoding.GetBytes(message);
             networkStream.Write(bytes, 0, bytes.Length);
