@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PatientDatabase
 {
-    [Serializable]
+    //[Serializable]
     public class PatientDatabase
     {
         private List<Patient> patients;

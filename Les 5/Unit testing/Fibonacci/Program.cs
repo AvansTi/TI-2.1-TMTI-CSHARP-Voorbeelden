@@ -9,12 +9,12 @@ namespace Fibonacci
     public class Calculate
     {
 
-        public int lastNumber = 0;
+        public int lastResult = 0;
         public int Fibonacci(int n) {
             if (n >= 47)
                 throw new
-                    OverflowException("Fibonacci with interger datatype is limited to n <= 47");
-
+                    OverflowException("Fibonacci with integer datatype is limited to n <= 47");
+                
             if (n < 0)
                 throw new ArgumentException("N >= 0");
 
@@ -27,7 +27,7 @@ namespace Fibonacci
                 b = temp + b;
             }
 
-            lastNumber = a;
+            lastResult = a;
             return a;
 
         }
@@ -36,7 +36,9 @@ namespace Fibonacci
     {
         static void Main(string[] args)
         {
-
+            Calculate cal = new Calculate();
+            
+            Console.WriteLine("The 46th fibonacci number is: " + cal.Fibonacci(46));
         }
 
 

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciTests", "Fibonacci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciReflection", "FibonacciReflection\FibonacciReflection.csproj", "{5D25D7F2-B6A7-4CB7-B822-4939D48E7C37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientDatabase", "PatientDatabase\PatientDatabase.csproj", "{C5DE0039-0D94-4C7C-B429-A100566CE0CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientDatabaseTests", "PatientDatabaseTests\PatientDatabaseTests.csproj", "{257D2FE0-E8A0-401E-ABF5-8ACE7D932464}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{5D25D7F2-B6A7-4CB7-B822-4939D48E7C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D25D7F2-B6A7-4CB7-B822-4939D48E7C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D25D7F2-B6A7-4CB7-B822-4939D48E7C37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5DE0039-0D94-4C7C-B429-A100566CE0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5DE0039-0D94-4C7C-B429-A100566CE0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5DE0039-0D94-4C7C-B429-A100566CE0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5DE0039-0D94-4C7C-B429-A100566CE0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{257D2FE0-E8A0-401E-ABF5-8ACE7D932464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{257D2FE0-E8A0-401E-ABF5-8ACE7D932464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{257D2FE0-E8A0-401E-ABF5-8ACE7D932464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{257D2FE0-E8A0-401E-ABF5-8ACE7D932464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
